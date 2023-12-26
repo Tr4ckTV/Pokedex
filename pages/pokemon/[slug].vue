@@ -1,47 +1,42 @@
 <script setup>
 const query = gql`
-  query Pokemon($slug: String!) {
-    pokemon(where: { slug: $slug }) {
-      id
-      nom
-      slug
-      description
-      createdAt
-      publishedAt
-      updatedAt
-      stage
-      image {
-        url(
-          transformation: {
-            image: { resize: { fit: crop, height: 1024, width: 1024 } }
-            document: { output: { format: webp } }
-          }
-        )
-      }
-    }
-    types_Pokemon {
+query Pokemon($slug: String!) {
+  pokemon(where: { slug: $slug }) {
+    id
     nom
-    logo {
-        url(
-          transformation: {
-            image: { resize: { fit: crop, height: 1024, width: 1024 } }
-            document: { output: { format: webp } }
-          }
-        )
+    slug
+    description
+    createdAt
+    publishedAt
+    updatedAt
+    stage
+    image {
+      url
+    }
+    types_Pokemons {
+      nom
+      logo {
+        url
       }
     }
   }
+}
+
 `;
 
+
 const pokemon = ref();
-const types = ref();
+const pokemonTypes = ref();
 const route = useRoute();
-const { data } = await useAsyncQuery(query, {
+const { data, error, loading } = await useAsyncQuery(query, {
   slug: route.params.slug,
 });
 console.log(data.value);
 pokemon.value = data.value.pokemon;
-types.value = data.value.types_Pokemon;
+pokemonTypes.value = data.value.types_Pokemons;
+
+console.log('Pokemon:', pokemon.value);
+console.log('Pokemon Types:', pokemonTypes.value);
 </script>
 
 <template>
@@ -76,17 +71,22 @@ types.value = data.value.types_Pokemon;
     </Head>
     <div v-if="pokemon" class="pokemon-content">
       <NuxtImg class="pokemon-image" :src="pokemon.image.url" :alt="pokemon.nom" />
+      
       <div class="pokemon-types">
-          <ul>
-            <li v-if="types && types[0]">
-              <NuxtImg class="type-logo" :src="types[0].logo.url" :alt="types[0].nom" />
-            </li>
-            <li v-if="types && types[1]">
-              <NuxtImg class="type-logo" :src="types[1].logo.url" :alt="types[1].nom" />
-            </li>
-          </ul>
-        </div>
-      </div>
+  <ul>
+    <li v-for="(type, index) in pokemon.types_Pokemons" :key="index">
+      <NuxtImg
+        class="type-logo"
+        :src="type.logo.url"
+        :alt="type.nom"
+      />
+    </li>
+  </ul>
+</div>
+
+
+
+  </div>
 
       <div class="pokemon-info">
         <h2 class="pokemon-name">{{ pokemon.nom }}</h2>
@@ -133,5 +133,4 @@ types.value = data.value.types_Pokemon;
   margin-top: 10px;
 }
 
-/* Ajoutez d'autres styles au besoin */
 </style>
