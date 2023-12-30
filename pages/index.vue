@@ -24,22 +24,37 @@ const query = gql`
 
 const pokemons = ref();
 const selectedPokemon = ref(null);
+const searchQuery = ref('');
+
 const { data } = await useAsyncQuery(query);
 console.log(data.value);
 pokemons.value = data.value.pokemons;
 
+onMounted(() => {
+  pokemons.value = data.value.pokemons;
+});
+
 const showDetails = (pokemon) => {
   selectedPokemon.value = pokemon;
 };
+
+const filteredPokemons = computed(() => {
+  return pokemons.value.filter((pokemon) =>
+    pokemon.nom.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
 </script>
 
 <template>
 
 <div class="grid">
 
+   <!-- Search input -->
+   <input v-model="searchQuery" placeholder="Search for a Pokemon" />
+
   <!-- Liste à gauche -->
-  <ul v-if="pokemons" class="pokemon-list">
-    <li v-for="pokemon in pokemons" :key="pokemon.id" @mouseover="showDetails(pokemon)">
+  <ul v-if="filteredPokemons" class="pokemon-list">
+      <li v-for="pokemon in filteredPokemons" :key="pokemon.id" @mouseover="showDetails(pokemon)">
       <NuxtLink :to="`/pokemon/${pokemon.slug}`">
         <h2 class="text-3xl text-center">{{ pokemon.nom }}</h2>
       </NuxtLink>
