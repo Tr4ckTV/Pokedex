@@ -97,7 +97,6 @@ console.log('Pokemon Types:', pokemonTypes.value);
 </template>
 
 
-
 <style scoped>
 .type-logo {
   width: 100%; /* Ajustez la largeur selon vos besoins */
@@ -128,6 +127,9 @@ console.log('Pokemon Types:', pokemonTypes.value);
 /* Style pour la liste des types */
 .pokemon-types {
   margin-top: 10px;
+  background-color: #fff; /* Ajoutez un fond blanc aux types */
+  padding: 10px; /* Ajoutez de la marge intérieure pour l'esthétique */
+  border-radius: 10px; /* Ajoutez un arrondi aux coins */
 }
 
 /* Style pour le logo du type */
@@ -152,5 +154,5 @@ console.log('Pokemon Types:', pokemonTypes.value);
 .pokemon-description {
   margin-top: 10px;
 }
-
 </style>
+
