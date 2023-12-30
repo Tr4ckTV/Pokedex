@@ -21,7 +21,6 @@ query Pokemon($slug: String!) {
     }
   }
 }
-
 `;
 
 
@@ -69,66 +68,87 @@ console.log('Pokemon Types:', pokemonTypes.value);
       />
       <Meta name="twitter:image" :content="pokemon.image.url" />
     </Head>
+
+
     <div v-if="pokemon" class="pokemon-content">
-      <NuxtImg class="pokemon-image" :src="pokemon.image.url" :alt="pokemon.nom" />
-      
+      <NuxtImg class="pokemon-image" :src="pokemon.image.url" :alt="pokemon.nom" />   
+
       <div class="pokemon-types">
-  <ul>
-    <li v-for="(type, index) in pokemon.types_Pokemons" :key="index">
-      <NuxtImg
-        class="type-logo"
-        :src="type.logo.url"
-        :alt="type.nom"
-      />
-    </li>
-  </ul>
-</div>
+        <ul>
+          <li v-for="(type, index) in pokemon.types_Pokemons" :key="index">
+            <NuxtImg
+            class="type-logo"
+            :src="type.logo.url"
+            :alt="type.nom"
+            />
+          </li>
+        </ul>
+      </div>
 
-
-
-  </div>
-
-      <div class="pokemon-info">
-        <h2 class="pokemon-name">{{ pokemon.nom }}</h2>
-        <p class="pokemon-description">{{ pokemon.description }}</p>
     </div>
+
+    <div class="pokemon-info">
+      <h2 class="pokemon-name">{{ pokemon.nom }}</h2>
+      <p class="pokemon-description">{{ pokemon.description }}</p>
+    </div>
+
   </div>
+
 </template>
 
 
 
 <style scoped>
-
-.type-logo 
-{
-  width: 300px; 
-  margin-left: 20px; 
+.type-logo {
+  width: 100%; /* Ajustez la largeur selon vos besoins */
 }
+
 .pokemon-details-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  display: grid;
+  grid-template-columns: 40% 55%; /* Définissez les colonnes pour l'image et les informations */
+  gap: 20px; /* Ajoutez un espace entre les colonnes */
 }
 
 .pokemon-content {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
 }
 
+/* Style pour l'image Pokémon */
 .pokemon-image {
-  width: 40%;
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
+/* Style pour la liste des types */
+.pokemon-types {
+  margin-top: 10px;
+}
+
+/* Style pour le logo du type */
+.type-logo {
+  width: 50px;
+  margin-left: 5px;
+}
+
+/* Style pour les informations Pokémon */
 .pokemon-info {
-  width: 55%;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Style pour le nom Pokémon */
 .pokemon-name {
   font-size: 2rem;
   margin: 0;
 }
 
+/* Style pour la description Pokémon */
 .pokemon-description {
   margin-top: 10px;
 }

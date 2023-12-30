@@ -10,36 +10,110 @@ const query = gql`
       slug
       updatedAt
       image {
-        url(
-          transformation: {
-            document: { output: { format: webp } }
-            image: { resize: { fit: crop, height: 256, width: 256 } }
-          }
-        )
+        url
+      }
+      types_Pokemons {
+        nom
+        logo {
+          url
+        }
       }
     }
   }
 `;
 
 const pokemons = ref();
+const selectedPokemon = ref(null);
 const { data } = await useAsyncQuery(query);
 console.log(data.value);
 pokemons.value = data.value.pokemons;
+
+const showDetails = (pokemon) => {
+  selectedPokemon.value = pokemon;
+};
 </script>
 
 <template>
-  <ul
-    v-if="pokemons"
-    class="grid gap-8 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6"
-  >
-    <li v-for="pokemon in pokemons" :key="pokemon.id">
+
+<div class="grid">
+
+  <!-- Liste à gauche -->
+  <ul v-if="pokemons" class="pokemon-list">
+    <li v-for="pokemon in pokemons" :key="pokemon.id" @mouseover="showDetails(pokemon)">
       <NuxtLink :to="`/pokemon/${pokemon.slug}`">
-        <NuxtImg :src="pokemon.image.url" :alt="pokemon.nom" />
         <h2 class="text-3xl text-center">{{ pokemon.nom }}</h2>
       </NuxtLink>
     </li>
   </ul>
-  <ul v-else>
-    <li>Loading...</li>
-  </ul>
+
+  <!-- Détails à droite -->
+  <div v-if="selectedPokemon" class="details">
+      <NuxtImg :src="selectedPokemon.image.url" :alt="selectedPokemon.nom" />
+      <h2>{{ selectedPokemon.nom }}</h2>
+
+      <!-- Types du Pokémon -->
+      <div class="types">
+        <span v-for="(type, index) in selectedPokemon.types_Pokemons" :key="index">
+          <NuxtImg class="type-logo" :src="type.logo.url" :alt="type.nom" />
+        </span>
+      </div>
+  </div>
+
+
+</div>
+
 </template>
+
+<style scoped>
+.grid {
+  display: flex;
+}
+
+.pokemon-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 30%;
+}
+
+.pokemon-list li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pokemon-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.details {
+  flex: 1;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.details img {
+  width: 30%;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.details h2 {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.types {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.types span {
+  margin-right: 5px;
+  padding: 5px;
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+
+</style>
