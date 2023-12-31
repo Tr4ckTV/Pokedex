@@ -1,7 +1,7 @@
 <script setup>
 const query = gql`
   query Pokemons {
-    pokemons(orderBy: id_ASC) {
+    pokemons(orderBy: id_ASC, first: 100) {
       createdAt
       description
       id
@@ -47,10 +47,10 @@ const filteredPokemons = computed(() => {
 
 <template>
 
-<div class="grid">
+     <!-- Search input -->
+     <input v-model="searchQuery" placeholder="Search for a Pokemon" />
 
-   <!-- Search input -->
-   <input v-model="searchQuery" placeholder="Search for a Pokemon" />
+<div class="grid">
 
   <!-- Liste à gauche -->
   <ul v-if="filteredPokemons" class="pokemon-list">
@@ -63,12 +63,12 @@ const filteredPokemons = computed(() => {
 
   <!-- Détails à droite -->
   <div v-if="selectedPokemon" class="details">
-      <NuxtImg :src="selectedPokemon.image.url" :alt="selectedPokemon.nom" />
-      <h2>{{ selectedPokemon.nom }}</h2>
+    <h2>{{ selectedPokemon.nom }}</h2>
+      <NuxtImg :src="selectedPokemon.image.url" :alt="selectedPokemon.nom" class="centered-image" />
 
       <!-- Types du Pokémon -->
       <div class="types">
-        <span v-for="(type, index) in selectedPokemon.types_Pokemons" :key="index">
+        <span v-for="(type, index) in selectedPokemon.types_Pokemons" :key="index" class="type">
           <NuxtImg class="type-logo" :src="type.logo.url" :alt="type.nom" />
         </span>
       </div>
@@ -89,6 +89,8 @@ const filteredPokemons = computed(() => {
   padding: 0;
   margin: 0;
   width: 30%;
+  background-color: #f8f8f8;
+  border-right: 1px solid #ddd;
 }
 
 .pokemon-list li {
@@ -98,37 +100,57 @@ const filteredPokemons = computed(() => {
 }
 
 .pokemon-list li:hover {
-  background-color: #f0f0f0;
+  background-color: #e0e0e0;
 }
 
 .details {
   flex: 1;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
 
 .details img {
-  width: 30%;
-  border: 2px solid black;
+  width: 40%;
+  border: 2px solid #333;
   border-radius: 10px;
 }
 
 .details h2 {
   font-size: 2rem;
   margin: 10px 0;
+  color: #333;
 }
 
 .types {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-.types span {
+.type {
   margin-right: 5px;
+  margin-bottom: 5px;
   padding: 5px;
   background-color: #ddd;
   border-radius: 5px;
+  width: 20%;
+  text-align: center;
 }
 
+input {
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.centered-image {
+  display: block;
+  margin: 0 auto;
+}
 
 </style>
