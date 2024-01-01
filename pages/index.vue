@@ -63,7 +63,6 @@ const filteredPokemons = computed(() => {
 
   <!-- Détails à droite -->
   <div v-if="selectedPokemon" class="details">
-    <h2>{{ selectedPokemon.nom }}</h2>
       <NuxtImg :src="selectedPokemon.image.url" :alt="selectedPokemon.nom" class="centered-image" />
 
       <!-- Types du Pokémon -->
