@@ -99,7 +99,7 @@ console.log('Pokemon Types:', pokemonTypes.value);
 
 <style scoped>
 .type-logo {
-  width: 100%; /* Ajustez la largeur selon vos besoins */
+  width: 100%; 
 }
 
 .pokemon-details-container {
@@ -107,8 +107,9 @@ console.log('Pokemon Types:', pokemonTypes.value);
   margin: 0 auto;
   padding: 20px;
   display: grid;
-  grid-template-columns: 40% 55%; /* Définissez les colonnes pour l'image et les informations */
-  gap: 20px; /* Ajoutez un espace entre les colonnes */
+  grid-template-columns: 40% 55%; 
+  gap: 20px; 
+  transform: translateY(50%);
 }
 
 .pokemon-content {
@@ -126,10 +127,9 @@ console.log('Pokemon Types:', pokemonTypes.value);
 
 /* Style pour la liste des types */
 .pokemon-types {
-  margin-top: 10px;
-  background-color: #fff; /* Ajoutez un fond blanc aux types */
-  padding: 10px; /* Ajoutez de la marge intérieure pour l'esthétique */
-  border-radius: 10px; /* Ajoutez un arrondi aux coins */
+  padding: 5px;
+  background-color: #ddd;
+  border-radius: 5px;
 }
 
 /* Style pour le logo du type */

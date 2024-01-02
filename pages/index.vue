@@ -66,10 +66,10 @@ const filteredPokemons = computed(() => {
       <NuxtImg :src="selectedPokemon.image.url" :alt="selectedPokemon.nom" class="centered-image" />
 
       <!-- Types du Pokémon -->
-      <div class="types">
-        <span v-for="(type, index) in selectedPokemon.types_Pokemons" :key="index" class="type">
-          <NuxtImg class="type-logo" :src="type.logo.url" :alt="type.nom" />
-        </span>
+      <div v-for="(type, index) in selectedPokemon.types_Pokemons" :key="index" class="types">
+        <div class="types-container">
+          <NuxtImg class="type" :src="type.logo.url" :alt="type.nom" />
+        </div>
       </div>
   </div>
 
@@ -86,10 +86,11 @@ const filteredPokemons = computed(() => {
 .pokemon-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin-left: 10%;
   width: 30%;
   background-color: #f8f8f8;
   border-right: 1px solid #ddd;
+  margin-right: 20px;
 }
 
 .pokemon-list li {
@@ -107,6 +108,7 @@ const filteredPokemons = computed(() => {
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  margin-right: 10%;
 }
 
 .details img {
@@ -123,28 +125,33 @@ const filteredPokemons = computed(() => {
 
 .types {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content:center;
+  align-items: center;
+}
+
+.types-container {
+  display: flex;
+  justify-content:center;
+  width: 20%;
 }
 
 .type {
-  margin-right: 5px;
-  margin-bottom: 5px;
   padding: 5px;
   background-color: #ddd;
   border-radius: 5px;
-  width: 20%;
-  text-align: center;
 }
 
 input {
   padding: 8px;
-  margin-bottom: 10px;
-  width: 100%;
+  margin: 0 auto 10px auto;
+  width: 80%;
   box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
+  display: block; /* Center the input horizontally */
+  margin-left: auto; /* Center the input horizontally */
+  margin-right: auto; /* Center the input horizontally */
 }
 
 .centered-image {
