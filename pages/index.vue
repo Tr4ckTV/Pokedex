@@ -139,6 +139,7 @@ const filteredPokemons = computed(() => {
   padding: 5px;
   background-color: #ddd;
   border-radius: 5px;
+  margin-top: 10px;
 }
 
 input {

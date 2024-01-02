@@ -109,7 +109,7 @@ console.log('Pokemon Types:', pokemonTypes.value);
   display: grid;
   grid-template-columns: 40% 55%; 
   gap: 20px; 
-  transform: translateY(50%);
+  transform: translateY(30%);
 }
 
 .pokemon-content {
@@ -130,11 +130,12 @@ console.log('Pokemon Types:', pokemonTypes.value);
   padding: 5px;
   background-color: #ddd;
   border-radius: 5px;
+  margin-top: 10px;
 }
 
 /* Style pour le logo du type */
 .type-logo {
-  width: 50px;
+  width: 80px;
   margin-left: 5px;
 }
 
