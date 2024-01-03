@@ -13,9 +13,13 @@
         <div id="miniButtonGlass1"></div>
         <div id="miniButtonGlass2"></div>
         <div id="miniButtonGlass3"></div>
+          <NuxtLink to="/table">
+            <div id="buttontable">
+              <div id="reflect"></div>
+            </div>
+          </NuxtLink>
       </div>
     <div id="curve2_left">
-
     </div>
     </div>
   </div>
@@ -235,6 +239,41 @@ div#miniButtonGlass3
   background: -moz-radial-gradient(#b0fb7b, #50fb05);
   background: -o-radial-gradient(#b0fb7b, #50fb05);
 }
+
+div#buttontable {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+  border: 5px solid #fff;
+  float: left;
+  z-index: 0;
+
+  box-shadow: 0 0 10px #490000;
+  -webkit-box-shadow: 0 0 10px #490000;
+  -moz-box-shadow: 0 0 10px #490000;
+  -o-box-shadow: 0 0 10px #490000;
+  
+  background: radial-gradient(#fb05ef, #ff59f7);
+  background: -webkit-radial-gradient(#fb05ef, #ff59f7);
+  background: -moz-radial-gradient(#fb05ef, #ff59f7);
+  background: -o-radial-gradient(#fb05ef, #ff59f7);
+  
+  border-radius: 35px;
+  -webkit-border-radius: 35px;
+  -moz-border-radius: 35px;
+     -o-border-radius: 35px;
+}
+
+#buttonGlass:hover,
+#buttontable:hover {
+  background: radial-gradient(#29abe3, #05fbfb);
+}
+
+#buttontable:hover {
+  background: radial-gradient(#ff59f7, #fb05ef);
+}
+
+
 }
 
 </style>

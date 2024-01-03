@@ -72,9 +72,9 @@ const filteredPokemons = computed(() => {
         </div>
       </div>
   </div>
-
-
 </div>
+
+
 
 </template>
 
@@ -150,9 +150,9 @@ input {
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
-  display: block; /* Center the input horizontally */
-  margin-left: auto; /* Center the input horizontally */
-  margin-right: auto; /* Center the input horizontally */
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto; 
 }
 
 .centered-image {
