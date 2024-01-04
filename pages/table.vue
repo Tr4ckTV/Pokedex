@@ -35,11 +35,10 @@ pokemons.value = data.value.types_Pokemon;
 
 <template>
   <div>
-    <!-- Types du Pokémon -->
     <table class="types-table">
       <thead>
         <tr>
-          <th>Logo</th>
+          <th>Types</th>
           <th>Fort contre</th>
           <th>Faible contre</th>
         </tr>
@@ -68,28 +67,44 @@ pokemons.value = data.value.types_Pokemon;
         </tr>
       </tbody>
     </table>
-
-    <!-- Display loading or error message -->
     <div v-if="fetching">Loading...</div>
     <div v-if="error">{{ error.message }}</div>
   </div>
 </template>
 
 <style scoped>
-.types-table {
-  width: 70%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
+  .types-table {
+    width: 70%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: #ddd;
+    transform: translateY(10%);
+  }
 
-.types-table th, .types-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
+  th, td {
+    text-align: center;
+    border: 1px solid black;
+    max-width: 150px;
+    word-wrap: break-word;
+  }
 
-.type-logo {
-  width: 30px; /* Adjust as needed */
-  height: auto;
-}
+  .type-logo {
+    max-width: 50px; 
+    max-height: 50px; 
+    display: block; 
+    margin: 0 auto;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+
+  div {
+    text-align: center;
+  }
 </style>
+

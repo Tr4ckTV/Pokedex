@@ -47,34 +47,30 @@ const filteredPokemons = computed(() => {
 
 <template>
 
-     <!-- Search input -->
      <input v-model="searchQuery" placeholder="Search for a Pokemon" />
 
-<div class="grid">
+      <div class="grid">
 
-  <!-- Liste à gauche -->
-  <ul v-if="filteredPokemons" class="pokemon-list">
-      <li v-for="pokemon in filteredPokemons" :key="pokemon.id" @mouseover="showDetails(pokemon)">
-      <NuxtLink :to="`/pokemon/${pokemon.slug}`">
-        <h2 class="text-3xl text-center">{{ pokemon.nom }}</h2>
-      </NuxtLink>
-    </li>
-  </ul>
+        <ul v-if="filteredPokemons" class="pokemon-list">
+          <li v-for="pokemon in filteredPokemons" :key="pokemon.id" @mouseover="showDetails(pokemon)">
+            <NuxtLink :to="`/pokemon/${pokemon.slug}`">
+              <h2 class="text-3xl text-center">{{ pokemon.nom }}</h2>
+            </NuxtLink>
+          </li>
+        </ul>
 
-  <!-- Détails à droite -->
-  <div v-if="selectedPokemon" class="details">
-      <NuxtImg :src="selectedPokemon.image.url" :alt="selectedPokemon.nom" class="centered-image" />
+        <div v-if="selectedPokemon" class="details">
+          <NuxtImg :src="selectedPokemon.image.url" :alt="selectedPokemon.nom" class="centered-image" />
 
-      <!-- Types du Pokémon -->
-      <div v-for="(type, index) in selectedPokemon.types_Pokemons" :key="index" class="types">
-        <div class="types-container">
-          <NuxtImg class="type" :src="type.logo.url" :alt="type.nom" />
+          <div v-for="(type, index) in selectedPokemon.types_Pokemons" :key="index" class="types">
+            <div class="types-container">
+              <NuxtImg class="type" :src="type.logo.url" :alt="type.nom" />
+            </div>
+          </div>
+
         </div>
+        
       </div>
-  </div>
-</div>
-
-
 
 </template>
 
